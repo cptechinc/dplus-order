@@ -83,8 +83,20 @@
 			CRUD FUNCTIONS
 		============================================================ */
 		/**
-		 * returns CartQuote from carthed table
-		 * @param  string $sessionID Session
+		 * Returns if Cart Head Exists
+		 * @param  string $sessionID Session ID
+		 * @param  bool   $debug     Whether or not to Return Cart Quote or SQL QUERY
+		 * @return bool              Is the carthed defined?
+		 * @uses Read (CRUD)
+		 * @source _dbfunc.php
+		 */
+		public static cart_exists($sessionID, $debug = false) {
+			return has_carthead($sessionID, $debug);
+		}
+
+		/**
+		 * Returns CartQuote from carthed table
+		 * @param  string $sessionID Session ID
 		 * @param  bool   $debug     Whether or not to Return Cart Quote or SQL QUERY
 		 * @return CartQuote         Or SQL Query
 		 * @uses Read (CRUD)
@@ -125,5 +137,4 @@
 		public static function get_cartcustid($sessionID, $debug = false) {
 			return get_custidfromcart($sessionID, $debug);
 		}
-
 	}
