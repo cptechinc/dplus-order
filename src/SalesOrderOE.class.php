@@ -6,10 +6,10 @@
 	 * The class for Editing Orders is the // TODO
 	 */
 	class SalesOrder extends Order {
-		use ThrowErrorTrait;
-		use MagicMethodTraits;
-		use CreateFromObjectArrayTraits;
-		use CreateClassArrayTraits;
+		use \Dplus\Base\ThrowErrorTrait;
+		use \Dplus\Base\MagicMethodTraits;
+		use \Dplus\Base\CreateFromObjectArrayTraits;
+		use \Dplus\Base\CreateClassArrayTraits;
 
 		/**
 		 * Sales Order Number
