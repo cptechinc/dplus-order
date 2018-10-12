@@ -1,4 +1,6 @@
 <?php
+	use Dplus\ProcessWire\DplusWire as DplusWire; 
+	
 	/**
 	 * Class to Set up and define what Quote, Cart, and Sales Order Details Need to do and provide them
 	 * with shared functions and properties that they can extend

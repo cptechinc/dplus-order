@@ -1,4 +1,6 @@
 <?php
+	use Dplus\ProcessWire\DplusWire;
+	
 	/**
 	 * Class for dealing with Sales Orders from the oe_head table
 	 * // NOTE This class is for readonly viewing of the Sales Orders
@@ -6,10 +8,10 @@
 	 * The class for Editing Orders is the // TODO
 	 */
 	class SalesOrder extends Order {
-		use ThrowErrorTrait;
-		use MagicMethodTraits;
-		use CreateFromObjectArrayTraits;
-		use CreateClassArrayTraits;
+		use Dplus\Base\ThrowErrorTrait;
+		use Dplus\Base\MagicMethodTraits;
+		use Dplus\Base\CreateFromObjectArrayTraits;
+		use Dplus\Base\CreateClassArrayTraits;
 
 		/**
 		 * Sales Order Number
@@ -114,7 +116,7 @@
 		 * // FORMAT YYYYMMDD
 		 * @var int
 		 */
-		protected $order_date;
+		protected $orderdate;
 
 		/**
 		 * Customer Terms Code
@@ -691,7 +693,6 @@
 		 */
 		public function can_edit() {
 			$config = DplusWire::wire('pages')->get('/config/')->child("name=sales-orders");
-			$config->allow_edit;
 			$user_permitted = has_dpluspermission(DplusWire::wire('user')->loginid, 'eso');
 			$can_edit = empty($this->lockedby) ? true : false;
 
@@ -708,13 +709,32 @@
 				return false;
 			}
 		}
+
+		/**
+		 * Returns if Sales Order is being locked for editing
+		 * @return boolean
+		 */
+		public function is_locked() {
+			return !empty($this->lockedby) ? true : false;
+		}
 		
+		/**
+		 * Return if Order Is on Review
+		 * // NOTE $this->holdstatuscode = R
+		 * 
+		 * @return boolean Is Order On Review?
+		 */
+		public function is_onreview() {
+			return $this->holdstatus == 'R' ? true : false;
+		}
+
 		/**
 		 * Is the Order locked by the Current User?
 		 * @return bool
 		 */
-		public function is_lockedbyuser() {
-			return (DplusWire::wire('user')->loginid == $this->lockedby) ? true : false;
+		public function is_lockedbyuser($userID = '') {
+			$userID = !empty($userID) ? $userID : DplusWire::wire('user')->loginid;
+			return ($userID == $this->lockedby) ? true : false;
 		}
 		
 		/**
@@ -724,6 +744,7 @@
 		public function get_statusdescription() {
 			return ucfirst($this->statusdescriptions[$this->status]);
 		}
+
 
 		/* =============================================================
 			CRUD FUNCTIONS
@@ -757,5 +778,13 @@
 		 */
 		public static function find_shiptoid($ordn = '', $debug = false) {
 			return get_shiptoidfromsalesorder($ordn, $debug);
+		}
+		
+		public static function is_orderlocked($ordn, $debug = false) {
+			return is_orderlocked($ordn, $debug);
+		}
+		
+		public static function get_orderlockuser($ordn, $debug = false) {
+			return get_orderlocklogin($ordn, $debug);
 		}
 	}
