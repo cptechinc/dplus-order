@@ -728,7 +728,7 @@
 			$userID = !empty($userID) ? $userID : DplusWire::wire('user')->loginid;
 			$user = LogmUser::load($userID);
 			
-			if ($this->is_onreview()) {
+			if ($this->is_approved()) {
 				return !$user->is_salesrep() ? true : false;
 			} else {
 				return $this->can_edit($userID);
