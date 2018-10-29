@@ -115,6 +115,10 @@
 			return is_ordersaleshistory($ordn, $debug);
 		}
 
+		public static function load($ordn, $debug = false) {
+			return get_saleshistoryorder($ordn, $debug);
+		}
+
 		public static function find_custid($ordn = '', $debug = false) {
 			return get_custidfromsaleshistory($ordn, $debug);
 		}
