@@ -108,6 +108,15 @@
 			return $array;
 		}
 
+		/**
+		 * Returns if SalesOrderis editable
+		 * @return bool
+		 * @uses SalesOrder
+		 */
+		public function can_edit($userID = '') {
+			return false;
+		}
+
 		/* =============================================================
 			CRUD FUNCTIONS
 		============================================================ */

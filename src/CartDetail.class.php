@@ -136,26 +136,6 @@
 		}
 
 		/* =============================================================
-			GENERATE DPLUS DATA FUNCTIONS
-		============================================================ */
-		/**
-		 * Generates the array for writing Data to Dplus
-		 * @param  string  $custID Customer ID
-		 * @param  mixed $shipID ShiptoID or false
-		 * @return array          [description]
-		 */
-		function generate_editdetaildata($custID, $shipID = false) {
-			$data = array(
-				'DBNAME' => DplusWire::wire('config')->dbName,
-				'CARTDET' => false,
-				'LINENO' => $this->linenbr
-			);
-			$data['CUSTID'] = empty($custID) ? $config->defaultweb : $custID;
-			if (!empty($shipID)) {$data['SHIPTOID'] = $shipID; }
-			return $data;
-		}
-
-		/* =============================================================
 			GENERATE ARRAY FUNCTIONS
 			The following are defined CreateClassArrayTraits
 			public static function generate_classarray()
@@ -185,8 +165,8 @@
 		============================================================ */
 		/**
 		 * Creates a Cart Detail record in the Database
-		 * @param  bool   $debug Whether SQL executes or not
-		 * @return string Query for the INSERT Operation
+		 * @param  bool   $debug Run in debug? If so return SQL Query
+		 * @return bool          Was Cart Detail Inserted?
 		 */
 		public function create($debug = false) {
 			return insert_cartdetail($this->sessionid, $this, $debug);
@@ -196,8 +176,8 @@
 		 * Reads the Cart Detail from the Database
 		 * @param  string  $sessionID Session ID
 		 * @param  int     $linenbr   Line # to load
-		 * @param  bool    $debug     Whether to return SQL query or CartDetail object
-		 * @return CartDetail         Or SQL Query for retrieving record
+		 * @param  bool    $debug     Run in debug? If so return SQL Query
+		 * @return CartDetail
 		 */
 		public static function load($sessionID, $linenbr, $debug = false) {
 			return get_cartdetail($sessionID, $linenbr, $debug);
@@ -205,11 +185,26 @@
 
 		/**
 		 * CartDetail submits changes to the record in the Database
-		 * @param  bool   $debug Whether SQL executes or not
-		 * @return string Query for the INSERT Operation
+		 * @param  bool   $debug Run in debug? If so return SQL Query
+		 * @return bool          Was Cart Detail updated?
 		 */
 		public function update($debug = false) {
 			return update_cartdetail($this->sessionid, $this, $debug);
+		}
+
+		/**
+		 * Updates or creates CartDetail in database
+		 * @param  bool   $debug Run in debug? If so return SQL Query
+		 * @return bool          Was Cart Detail Updated / Created
+		 * @uses Update (CRUD)
+		 * @source _dbfunc.php
+		 */
+		public function save($debug = false) {
+			if (does_cartdetailexist($this->sessionid, $this->linenbr)) {
+				return $this->update($debug);
+			} else {
+				return $this->create($debug);
+			}
 		}
 
 		/**

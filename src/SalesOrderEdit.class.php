@@ -204,22 +204,32 @@
 		
 		/**
 		 * Updates the Sales Order in the ordrhed table
-		 * @param  bool   $debug Whether or not SQL Query is Executed
-		 * @return string SQL QUERY
+		 * @param  bool   $debug Run in debug? If so, will return SQL Query
+		 * @return bool          Was Sales Order updated?
 		 * @uses Update (CRUD)
 		 */
 		public function update($debug = false) {
-			return edit_orderhead($this->sessionid, $this->orderno, $this, $debug);
+			return update_orderhead($this->sessionid, $this->orderno, $this, $debug);
+		}
+
+		/**
+		 * Updates the Sales Order in the ordrhed table
+		 * @param  bool   $debug Run in debug? If so, will return SQL Query
+		 * @return bool          Was Sales Order updated?
+		 * @uses Update (CRUD)
+		 */
+		public function save($debug = false) {
+			return $this->update($debug);
 		}
 
 		/**
 		 * Updates the Payment Information Sales Order in the ordrhed table
-		 * @param  bool   $debug Whether or not SQL Query is Executed
-		 * @return string SQL QUERY
+		 * @param  bool   $debug Run in debug? If so, will return SQL Query
+		 * @return bool          Was Sales Order Payment Info updated?
 		 * @uses UPDATE (CRUD)
 		 */
 		public function update_payment($debug = false) {
-			return edit_orderhead_credit($sessionID, $this->orderno, $this->paymenttype, $this->cardnumber, $this->cardexpire, $this->cardcode, $debug) ;
+			return  update_orderhead_credit($sessionID, $this->orderno, $this->paymenttype, $this->cardnumber, $this->cardexpire, $this->cardcode, $debug) ;
 		}
 
 		/**

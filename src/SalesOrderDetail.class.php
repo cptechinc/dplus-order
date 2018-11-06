@@ -47,7 +47,7 @@
 		 * @uses SalesOrder
 		 */
 		public function can_edit() {
-			$order = SalesOrder::load($this->orderno);
+			$order = SalesOrderHistory::is_saleshistory($this->orderno) ? SalesOrderHistory::load($this->orderno) : SalesOrder::load($this->orderno);
 			return $order->can_edit();
 		}
 
@@ -125,12 +125,22 @@
 			CRUD FUNCTIONS
 		============================================================ */
 		/**
+		 * Inserts SalesOrderDetail into the Database
+		 * @param  bool   $debug Whether or not Query is Executed
+		 * @return bool          Was Sales Order Detail Created?
+		 * @uses   Create (CRUD)
+		 */
+		public function create($debug = false) {
+			return insert_orderdetail($this->sessionid, $this, $debug);
+		}
+
+		/**
 		 * Returns SalesOrderDetail from ordrdet
 		 * @param  string $sessionID Session ID
 		 * @param  string $ordn      Sales Order #
 		 * @param  int    $linenbr   Line #
-		 * @param  bool   $debug     Wheter or not to return SalesOrderDetail or
-		 * @return SalesOrderDetail [description]
+		 * @param  bool   $debug     Run in debug? If so return SQL Query
+		 * @return SalesOrderDetail  
 		 * @uses Read (CRUD)
 		 * @source _dbfunc.php
 		 */
@@ -139,14 +149,41 @@
 		}
 
 		/**
-		 * Updates SalesOrderDetail in orderdet
-		 * @param  bool   $debug Whether or not SQL is Executed
-		 * @return string        SQL QUERY
+		 * Returns if ordrdet record exists for this Session, Order Number, Line Number
+		 * @param  string $sessionID Session ID
+		 * @param  string $ordn      Sales Order #
+		 * @param  int    $linenbr   Line #
+		 * @param  bool   $debug     Run in debug? If so return SQL Query
+		 * @return bool              Does ordrdet record exist?
+		 */
+		public static function does_exist($sessionID, $ordn, $linenbr, $debug = false) {
+			return does_orderdetailexist($sessionID, $ordn, $linenbr, $debug);
+		}
+
+		/**
+		 * Updates SalesOrderDetail in database
+		 * @param  bool   $debug Run in debug? If so return SQL Query
+		 * @return bool          Was Sales Order Detail Updated?
 		 * @uses Update (CRUD)
 		 * @source _dbfunc.php
 		 */
 		public function update($debug = false) {
 			return update_orderdetail($this->sessionid, $this, $debug);
+		}
+
+		/**
+		 * Updates or creates SalesOrderDetail in orderdet depending if it exists
+		 * @param  bool   $debug Run in debug? If so return SQL Query
+		 * @return bool          Was Sales Order Detail Updated / Created
+		 * @uses Update (CRUD)
+		 * @source _dbfunc.php
+		 */
+		public function save($debug = false) {
+			if (does_orderdetailexist($this->sessionid, $this->orderno, $this->linenbr)) {
+				return $this->update($debug);
+			} else {
+				return $this->create($debug);
+			}
 		}
 
 		/**

@@ -109,7 +109,7 @@
 		/**
 		 * Inserts QuoteDetail into the Database
 		 * @param  bool   $debug Whether or not Query is Executed
-		 * @return string SQL UPDATE QUERY
+		 * @return bool          Was QuoteDetail created?
 		 * @uses   Create (CRUD)
 		 */
 		public function create($debug = false) {
@@ -121,7 +121,7 @@
 		 * @param  string $sessionID Session ID
 		 * @param  string $qnbr      Quote #
 		 * @param  int    $linenbr   Line #
-		 * @param  bool   $debug     Whether to Return SQL Query or Quote Detail
+		 * @param  bool   $debug     Run in debug? If so return SQL Query
 		 * @return QuoteDetail       Loaded From Query
 		 * @uses   Read (CRUD)
 		 */
@@ -131,12 +131,27 @@
 
 		/**
 		 * Updates the QuoteDetail in the database
-		 * @param  bool   $debug Whether Update Query is run or not
-		 * @return string SQL Query
+		 * @param  bool   $debug Run in debug? If so return SQL Query
+		 * @return bool          Was QuoteDetail updated?
 		 * @uses   Update (CRUD)
 		 */
 		public function update($debug = false) {
 			return update_quotedetail($this->sessionid, $this, $debug);
+		}
+
+		/**
+		 * Updates or creates QuoteDetail in database
+		 * @param  bool   $debug Run in debug? If so return SQL Query
+		 * @return bool          Was Quote Detail Updated / Created
+		 * @uses Update (CRUD)
+		 * @source _dbfunc.php
+		 */
+		public function save($debug = false) {
+			if (does_quotedetailexist($this->sessionid, $this->quotenbr, $this->linenbr)) {
+				return $this->update($debug);
+			} else {
+				return $this->create($debug);
+			}
 		}
 
 		/**
