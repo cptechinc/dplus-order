@@ -84,6 +84,28 @@
 		}
 
 		/**
+		 * Returns a Customer ID from a Quote or this order if applicable
+		 * @param  string $sessionID Session Identifier
+		 * @param  string $qnbr      Quote Number
+		 * @param  bool   $debug     Run in debug? If so will return SQL Query
+		 * @return string            Customer ID
+		 */
+		public static function find_custid($sessionID, $qnbr, $debug = false) {
+			return get_custidfromquote($sessionID, $qnbr, $debug);
+		}
+
+		/**
+		 * Returns a Customer Shipto ID from a Quote or this order if applicable
+		 * @param  string $sessionID Session Identifier
+		 * @param  string $qnbr      Quote Number
+		 * @param  bool   $debug     Run in debug? If so will return SQL Query
+		 * @return string            Customer Shipto ID
+		 */
+		public static function find_shiptoid($sessionID, $qnbr, $debug = false) {
+			return get_shiptoidfromquote($sessionID, $qnbr, $debug);
+		}
+
+		/**
 		 * Updates the Quote in the Database
 		 * @param  bool $debug Whether or Query is Executed
 		 * @return string         SQL Query
