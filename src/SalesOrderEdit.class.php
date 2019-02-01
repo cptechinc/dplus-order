@@ -211,6 +211,8 @@
 		 * @uses Create (CRUD)
 		 */
 		public function create($debug = false) {
+			$this->set('date', date('Ymd'));
+			$this->set('time', date('His'));
 			return insert_orderhead($this->sessionid, $this->orderno, $this, $debug);
 		}
 		
@@ -221,6 +223,8 @@
 		 * @uses Update (CRUD)
 		 */
 		public function update($debug = false) {
+			$this->set('date', date('Ymd'));
+			$this->set('time', date('His'));
 			return update_orderhead($this->sessionid, $this->orderno, $this, $debug);
 		}
 
