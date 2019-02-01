@@ -173,6 +173,7 @@
 		 * @return array        with certain keys removed
 		 */
 		public static function remove_nondbkeys($array) {
+            unset($array['fieldaliases']);
 			return $array;
 		}
 
@@ -200,6 +201,17 @@
 		 */
 		public static function load($sessionID, $ordn, $debug = false) {
 			return get_salesorderforedit($sessionID, $ordn, $debug);
+		}
+        
+        /**
+		 * Creates the Sales Order in the Database
+		 * NOTE this is only for functions that need to insert the record
+		 * @param  bool   $debug Run in debug? If so, will return SQL Query
+		 * @return bool          Was Sales Order created?
+		 * @uses Create (CRUD)
+		 */
+		public function create($debug = false) {
+			return insert_orderhead($this->sessionid, $this->orderno, $this, $debug);
 		}
 		
 		/**
