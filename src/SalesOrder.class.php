@@ -685,6 +685,12 @@
 
 		/**
 		 * Returns if the user can edit this order
+		 * // TODO REMOVE ANYTHING THAT IS  DEALING WITH APPLICATION LOGIC, MOVE IT TO THE APPLICATION LOGIC CODE
+		 * THIS SHOULD ONLY HANDLE IF A. THE SALES ORDER IS ABLE TO BE EDITED BECAUSE THE CURRENT USER IS LOCKING
+		 * OR THE SALES ORDER ISN'T BEING LOCKED
+		 * 
+		 * 
+		 * 
 		 * // NOTE if $userID is not supplied it will validate against current User
 		 * 1. Checks if the Sales Orders can be edited at all
 		 * 2. Checks if the User has the permissions to edit orders
@@ -721,6 +727,10 @@
 		
 		/**
 		 * Returns if User can edit an order that may be on review
+		 * 
+		 * // TODO REMOVE ANYTHING THAT IS  DEALING WITH APPLICATION LOGIC, MOVE IT TO THE APPLICATION LOGIC CODE
+		 * 
+		 * 
 		 * @param  string $userID  User ID to validate if they can edit order
 		 * @return bool            Can Order Be edited by user?
 		 */
@@ -765,6 +775,8 @@
 
 		/**
 		 * Is the Order locked by the Current User?
+		 * // TODO REMOVE ANYTHING THAT IS  DEALING WITH APPLICATION LOGIC, MOVE IT TO THE APPLICATION LOGIC CODE
+		 * 
 		 * // NOTE Will default to current logged in User ID if user ID is not provided
 		 * @param  string $userID User ID to compare $this->lockedby field against
 		 * @return bool
