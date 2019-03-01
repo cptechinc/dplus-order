@@ -799,6 +799,16 @@
 			CRUD FUNCTIONS
 		============================================================ */
 		/**
+		 * Returns if Sales Order Exists
+		 * @param  string  $ordn  Sales Order #
+		 * @param  bool    $debug Run in debug? If so, will return SQL Query
+		 * @return bool           Does Sales Order Exist?
+		 */
+		public static function exists($ordn, $debug = false) {
+			return does_salesorderexist($ordn, $debug);
+		}
+		
+		/**
 		 * Returns SalesOrder from oe_head
 		 * @param  string            $ordn      Sales Order #
 		 * @param  bool              $debug     Run in debug? If so, will return SQL Query
