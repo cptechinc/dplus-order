@@ -6,7 +6,7 @@
     "homepage": "http://github.com/cptechinc/dplus-order",
 	"autoload": {
 		"classmap": ["src/"]
-	}
+	},
 	"require": {
 		"propel/propel": "~2.0@dev"
 	}
