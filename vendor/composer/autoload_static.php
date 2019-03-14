@@ -6,9 +6,58 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitd5ef6c43ea1093d87aa144ef184de290
 {
+    public static $classMap = array (
+        'Base\\Cart' => __DIR__ . '/../..' . '/src/Base/Cart.php',
+        'Base\\CartDetail' => __DIR__ . '/../..' . '/src/Base/CartDetail.php',
+        'Base\\CartDetailQuery' => __DIR__ . '/../..' . '/src/Base/CartDetailQuery.php',
+        'Base\\CartQuery' => __DIR__ . '/../..' . '/src/Base/CartQuery.php',
+        'Base\\CartQuote' => __DIR__ . '/../..' . '/src/Base/CartQuote.php',
+        'Base\\CartQuoteQuery' => __DIR__ . '/../..' . '/src/Base/CartQuoteQuery.php',
+        'Base\\Quote' => __DIR__ . '/../..' . '/src/Base/Quote.php',
+        'Base\\QuoteDetail' => __DIR__ . '/../..' . '/src/Base/QuoteDetail.php',
+        'Base\\QuoteDetailQuery' => __DIR__ . '/../..' . '/src/Base/QuoteDetailQuery.php',
+        'Base\\QuoteQuery' => __DIR__ . '/../..' . '/src/Base/QuoteQuery.php',
+        'Base\\SalesHistory' => __DIR__ . '/../..' . '/src/Base/SalesHistory.php',
+        'Base\\SalesHistoryQuery' => __DIR__ . '/../..' . '/src/Base/SalesHistoryQuery.php',
+        'Base\\SalesOrder' => __DIR__ . '/../..' . '/src/Base/SalesOrder.php',
+        'Base\\SalesOrderDetail' => __DIR__ . '/../..' . '/src/Base/SalesOrderDetail.php',
+        'Base\\SalesOrderDetailQuery' => __DIR__ . '/../..' . '/src/Base/SalesOrderDetailQuery.php',
+        'Base\\SalesOrderEdit' => __DIR__ . '/../..' . '/src/Base/SalesOrderEdit.php',
+        'Base\\SalesOrderEditQuery' => __DIR__ . '/../..' . '/src/Base/SalesOrderEditQuery.php',
+        'Base\\SalesOrderQuery' => __DIR__ . '/../..' . '/src/Base/SalesOrderQuery.php',
+        'Cart' => __DIR__ . '/../..' . '/src/Cart.php',
+        'CartDetail' => __DIR__ . '/../..' . '/src/CartDetail.php',
+        'CartDetailQuery' => __DIR__ . '/../..' . '/src/CartDetailQuery.php',
+        'CartQuery' => __DIR__ . '/../..' . '/src/CartQuery.php',
+        'CartQuote' => __DIR__ . '/../..' . '/src/CartQuote.php',
+        'CartQuoteQuery' => __DIR__ . '/../..' . '/src/CartQuoteQuery.php',
+        'Map\\CartDetailTableMap' => __DIR__ . '/../..' . '/src/Map/CartDetailTableMap.php',
+        'Map\\CartQuoteTableMap' => __DIR__ . '/../..' . '/src/Map/CartQuoteTableMap.php',
+        'Map\\CartTableMap' => __DIR__ . '/../..' . '/src/Map/CartTableMap.php',
+        'Map\\QuoteDetailTableMap' => __DIR__ . '/../..' . '/src/Map/QuoteDetailTableMap.php',
+        'Map\\QuoteTableMap' => __DIR__ . '/../..' . '/src/Map/QuoteTableMap.php',
+        'Map\\SalesHistoryTableMap' => __DIR__ . '/../..' . '/src/Map/SalesHistoryTableMap.php',
+        'Map\\SalesOrderDetailTableMap' => __DIR__ . '/../..' . '/src/Map/SalesOrderDetailTableMap.php',
+        'Map\\SalesOrderEditTableMap' => __DIR__ . '/../..' . '/src/Map/SalesOrderEditTableMap.php',
+        'Map\\SalesOrderTableMap' => __DIR__ . '/../..' . '/src/Map/SalesOrderTableMap.php',
+        'Quote' => __DIR__ . '/../..' . '/src/Quote.php',
+        'QuoteDetail' => __DIR__ . '/../..' . '/src/QuoteDetail.php',
+        'QuoteDetailQuery' => __DIR__ . '/../..' . '/src/QuoteDetailQuery.php',
+        'QuoteQuery' => __DIR__ . '/../..' . '/src/QuoteQuery.php',
+        'SalesHistory' => __DIR__ . '/../..' . '/src/SalesHistory.php',
+        'SalesHistoryQuery' => __DIR__ . '/../..' . '/src/SalesHistoryQuery.php',
+        'SalesOrder' => __DIR__ . '/../..' . '/src/SalesOrder.php',
+        'SalesOrderDetail' => __DIR__ . '/../..' . '/src/SalesOrderDetail.php',
+        'SalesOrderDetailQuery' => __DIR__ . '/../..' . '/src/SalesOrderDetailQuery.php',
+        'SalesOrderEdit' => __DIR__ . '/../..' . '/src/SalesOrderEdit.php',
+        'SalesOrderEditQuery' => __DIR__ . '/../..' . '/src/SalesOrderEditQuery.php',
+        'SalesOrderQuery' => __DIR__ . '/../..' . '/src/SalesOrderQuery.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->classMap = ComposerStaticInitd5ef6c43ea1093d87aa144ef184de290::$classMap;
 
         }, null, ClassLoader::class);
     }
