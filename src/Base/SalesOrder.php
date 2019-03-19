@@ -60,133 +60,149 @@ abstract class SalesOrder implements ActiveRecordInterface
     protected $virtualColumns = array();
 
     /**
-     * The value for the ordernumber field.
+     * Sales Order Number
      *
      * @var        string
      */
     protected $ordernumber;
 
     /**
-     * The value for the status field.
-     *
+     * Sales Order Status
+     * N = New | P = Picked | V = Verified | I = Invoiced
+     * 
      * @var        string
      */
     protected $status;
 
     /**
-     * The value for the holdstatus field.
-     *
+     *  Hold Status Code
+     *  NOTE: The code is Case Sensitive
+		 * A = Customer is on Credit Hold
+		 * B = A detail line did not meet minimum margin requirements, Was an A, C, or H before
+		 * C = Over Credit Limit
+		 * H = This order is on Hold
+		 * M = A detail line did not meet minimum margin requirements, line quantity, or order amount.
+		 *     Same as B but was not on hold for other reasons
+		 * N = Not on Hold
+		 * R = Review by Sales Rep
+		 * r = reviewed by Sales Rep
+		 * n = Not on hold, released by user
+		 * S = On hold, waiting for transfer
+		 * T = On hold because of Terms or Rejected Credit Card
+		 * W = On hold because this a a new Web Order
      * @var        string
      */
     protected $holdstatus;
 
     /**
-     * The value for the custid field.
+     * Customer ID
      *
      * @var        string
      */
     protected $custid;
 
     /**
-     * The value for the shiptoid field.
+     * Customer Shipto ID
      *
      * @var        string
      */
     protected $shiptoid;
 
     /**
-     * The value for the shipto_name field.
+     * Shipto Name
      *
      * @var        string
      */
     protected $shipto_name;
 
     /**
-     * The value for the shipto_address1 field.
+     * Shipto Address Line 1
      *
      * @var        string
      */
     protected $shipto_address1;
 
     /**
-     * The value for the shipto_address2 field.
+     * Shipto Address Line 2
      *
      * @var        string
      */
     protected $shipto_address2;
 
     /**
-     * The value for the shipto_address3 field.
+     * Shipto Address Line 3
      *
      * @var        string
      */
     protected $shipto_address3;
 
     /**
-     * The value for the shipto_address4 field.
+     * Shipto Address Line 4
      *
      * @var        string
      */
     protected $shipto_address4;
 
     /**
-     * The value for the shipto_city field.
+     * Shipto City
      *
      * @var        string
      */
     protected $shipto_city;
 
     /**
-     * The value for the shipto_state field.
+     * Shipto State
      *
      * @var        string
      */
     protected $shipto_state;
 
     /**
-     * The value for the shipto_zip field.
+     * Shipto Zip
      *
      * @var        string
      */
     protected $shipto_zip;
 
     /**
-     * The value for the custpo field.
+     * Customer PO Number
      *
      * @var        string
      */
     protected $custpo;
 
     /**
-     * The value for the order_date field.
-     *
+     * Sales Order Date / Date Order was Taken
+     * NOTE FORMAT YYYYMMDD
      * @var        int
      */
     protected $order_date;
 
     /**
-     * The value for the termcode field.
+     * Customer Terms Code
      *
      * @var        string
      */
     protected $termcode;
 
     /**
-     * The value for the shipviacode field.
+     * Ship Via code
      *
      * @var        string
      */
     protected $shipviacode;
 
     /**
-     * The value for the invoice_number field.
+     * Invoice Number
+     * NOTE usually the Sales Order Number, but not always
      *
      * @var        int
      */
     protected $invoice_number;
 
     /**
-     * The value for the invoice_date field.
+     * Date Order was Invoiced
+     * NOTE FORMAT YYYYMMDD
      *
      * @var        int
      */
@@ -200,42 +216,42 @@ abstract class SalesOrder implements ActiveRecordInterface
     protected $genledger_period;
 
     /**
-     * The value for the salesperson_1 field.
+     * Sales Person 1 ID
      *
      * @var        string
      */
     protected $salesperson_1;
 
     /**
-     * The value for the salesperson_1pct field.
+     * Sales Person 1 Percent
      *
      * @var        string
      */
     protected $salesperson_1pct;
 
     /**
-     * The value for the salesperson_2 field.
+     * Sales Person 2 ID
      *
      * @var        string
      */
     protected $salesperson_2;
 
     /**
-     * The value for the salesperson_2pct field.
+     * Sales Person 2 Percent
      *
      * @var        string
      */
     protected $salesperson_2pct;
 
     /**
-     * The value for the salesperson_3 field.
+     * Sales Person 3 ID
      *
      * @var        string
      */
     protected $salesperson_3;
 
     /**
-     * The value for the salesperson_3pct field.
+     * Sales Person 3 Percent
      *
      * @var        string
      */
@@ -263,49 +279,49 @@ abstract class SalesOrder implements ActiveRecordInterface
     protected $dropreleasehold;
 
     /**
-     * The value for the subtotal_nontax field.
+     * Sales Order Subtotal without Tax
      *
      * @var        string
      */
     protected $subtotal_nontax;
 
     /**
-     * The value for the subtotal_tax field.
+     * Sales Order Subtotal with Tax
      *
      * @var        string
      */
     protected $subtotal_tax;
 
     /**
-     * The value for the total_tax field.
+     * Sales Order total with Tax
      *
      * @var        string
      */
     protected $total_tax;
 
     /**
-     * The value for the total_freight field.
+     * Sales Order Freight Total
      *
      * @var        string
      */
     protected $total_freight;
 
     /**
-     * The value for the total_misc field.
+     * Sales Order total Miscx
      *
      * @var        string
      */
     protected $total_misc;
 
     /**
-     * The value for the total_order field.
+     * Sales Order Total with Tax
      *
      * @var        string
      */
     protected $total_order;
 
     /**
-     * The value for the total_cost field.
+     * Sales Order total Cost
      *
      * @var        string
      */
@@ -319,56 +335,62 @@ abstract class SalesOrder implements ActiveRecordInterface
     protected $lock;
 
     /**
-     * The value for the taken_date field.
+     * Order Taken Date
+     * NOTE FORMAT YYYYMMDD
      *
      * @var        int
      */
     protected $taken_date;
 
     /**
-     * The value for the taken_time field.
+     * Order Taken Date
+     * NOTE FORMAT HHMMSS
      *
      * @var        int
      */
     protected $taken_time;
 
     /**
-     * The value for the pick_date field.
-     *
+     * Order Picked Date
+     * NOTE FORMAT YYYYMMDD
      * @var        int
      */
     protected $pick_date;
 
     /**
-     * The value for the pick_time field.
-     *
+     * Order Picked Time
+     * NOTE FORMAT HHMMSS
      * @var        int
      */
     protected $pick_time;
 
     /**
-     * The value for the pack_date field.
+     * Order Packed Date
+     * NOTE FORMAT YYYYMMDD
      *
      * @var        int
      */
     protected $pack_date;
 
     /**
-     * The value for the pack_time field.
+     * Order Packed Time
+     * NOTE FORMAT HHMMSS
      *
      * @var        int
      */
     protected $pack_time;
 
     /**
-     * The value for the verify_date field.
+     * Order Verified Date
+     * NOTE FORMAT YYYYMMDD
      *
      * @var        int
      */
     protected $verify_date;
 
     /**
-     * The value for the verify_time field.
+     * Order Verified Time
+     * NOTE FORMAT HHMMSS
      *
      * @var        int
      */
@@ -396,14 +418,15 @@ abstract class SalesOrder implements ActiveRecordInterface
     protected $original_whse;
 
     /**
-     * The value for the billto_state field.
+     * Customer Billto State
      *
      * @var        string
      */
     protected $billto_state;
 
     /**
-     * The value for the shipcomplete field.
+     * Ship Complete ?
+     * NOTE Y = Yes | N = No
      *
      * @var        string
      */
@@ -452,7 +475,7 @@ abstract class SalesOrder implements ActiveRecordInterface
     protected $verify_code;
 
     /**
-     * The value for the total_discount field.
+     * Sum of all discounts applied to Sales Order
      *
      * @var        string
      */
@@ -508,14 +531,14 @@ abstract class SalesOrder implements ActiveRecordInterface
     protected $exchange_rate;
 
     /**
-     * The value for the weight_total field.
+     * Total Weight for Sales Order
      *
      * @var        string
      */
     protected $weight_total;
 
     /**
-     * The value for the weight_override field.
+     * Override of Total Weight for Sales Order
      *
      * @var        string
      */
@@ -529,8 +552,8 @@ abstract class SalesOrder implements ActiveRecordInterface
     protected $box_count;
 
     /**
-     * The value for the request_date field.
-     *
+     * Requested Ship Date
+     * NOTE FORMAT YYYYMMDD
      * @var        int
      */
     protected $request_date;
